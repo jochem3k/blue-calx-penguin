@@ -7,7 +7,7 @@ set -ouex pipefail
 # - installs shared packages (tmux, etc.)
 source /ctx/common/build_files/build.sh
 
-### Desktop-specific customizations below ###
+### ThinkPad-specific customizations below ###
 
 # Packages can be installed from any enabled yum repo on the image.
 # RPMfusion repos are available by default in ublue main images

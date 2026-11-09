@@ -68,7 +68,7 @@ sudoif command *args:
         elif [[ "$(command -v sudo)" && -n "${SSH_ASKPASS:-}" ]] && [[ -n "${DISPLAY:-}" || -n "${WAYLAND_DISPLAY:-}" ]]; then
             sudo --askpass "$@" || exit 1
         elif [[ "$(command -v sudo)" ]]; then
-            sudo "$@" || exit 1
+            sudo "$@"
         else
             exit 1
         fi
@@ -78,22 +78,28 @@ sudoif command *args:
 # This Justfile recipe builds a container image using Podman.
 #
 # Arguments:
-#   $target_image - The tag you want to apply to the image (default: $image_name).
+#   $target_image - The name of the image to build (default: $image_name).
+#                   In CI this is e.g. "cerulean-city-customs-desktop".
 #   $tag - The tag for the image (default: $default_tag).
+#   $containerfile - Path to the Containerfile to build
+#                    (default: "Containerfile"; per-machine examples:
+#                    "images/desktop/Containerfile",
+#                    "images/thinkpad/Containerfile").
 #
 # The script constructs the version string using the tag and the current date.
 # If the git working directory is clean, it also includes the short SHA of the current HEAD.
 #
-# just build $target_image $tag
+# just build $target_image $tag $containerfile
 #
 # Example usage:
 #   just build myimage mytag
+#   just build cerulean-city-customs-desktop latest images/desktop/Containerfile
 #
 # This will build an image 'myimage:mytag'
 #
 
 # Build the image using the specified parameters
-build $target_image=image_name $tag=default_tag:
+build $target_image=image_name $tag=default_tag $containerfile="Containerfile":
     #!/usr/bin/env bash
 
     set -euox pipefail
@@ -122,7 +128,7 @@ build $target_image=image_name $tag=default_tag:
     LABELS+=("--label" "org.opencontainers.image.vendor={{ repo_organization }}")
 
     # This actually builds the image!
-    PODMAN_BUILD_ARGS=("${BUILD_ARGS[@]}" "${LABELS[@]}" --pull=newer --tag "${target_image}:${tag}" --file Containerfile)
+    PODMAN_BUILD_ARGS=("${BUILD_ARGS[@]}" "${LABELS[@]}" --pull=newer --tag "${target_image}:${tag}" --file "${containerfile}")
 
     podman build "${PODMAN_BUILD_ARGS[@]}" .
 
@@ -248,7 +254,7 @@ image_name $target_image=image_name:
 #
 # Parameters:
 #   $target_image - The name of the target image to be loaded or pulled.
-#   $tag - The tag of the target image to be loaded or pulled. Default is 'default_tag'.
+#   $tag - The tag of the target image to be pulled. Default is 'default_tag'.
 #
 # Example usage:
 #   _rootful_load_image my_image latest
@@ -257,7 +263,7 @@ image_name $target_image=image_name:
 # 1. Check if the script is already running as root or under sudo.
 # 2. Check if target image is in the non-root podman container storage)
 # 3. If the image is found, load it into rootful podman using podman scp.
-# 4. If the image is not found, pull it from the remote repository into reootful podman.
+# 4. If the image is not found, pull it from the repository into rootful podman.
 
 _rootful_load_image $target_image=image_name $tag=default_tag:
     #!/usr/bin/env bash
