@@ -1,0 +1,13 @@
+[Unit]
+Description=Mount Data NVMe Drive
+After=local-fs.target
+
+[Mount]
+What=/dev/disk/by-label/Data
+Where=/var/mnt/data
+Type=auto
+Options=defaults,nofail,noatime,lazytime,compress=zstd:3,ssd
+
+
+[Install]
+WantedBy=multi-user.target

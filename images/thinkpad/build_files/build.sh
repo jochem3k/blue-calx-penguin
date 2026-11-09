@@ -7,17 +7,11 @@ set -ouex pipefail
 # - installs shared packages (tmux, etc.)
 source /ctx/common/build_files/build.sh
 
-### ThinkPad-specific customizations below ###
+### Thinkpad-specific customizations below ###
+
+dnf5 brightnessctl -y \
+playerctl \
 
 # Packages can be installed from any enabled yum repo on the image.
-# RPMfusion repos are available by default in ublue main images
 
-# Example: install thinkpad-only packages here
-# dnf5 install -y steam
-
-# Use a COPR Example:
-#
-# dnf5 -y copr enable ublue-os/staging
-# dnf5 -y install package
-# Disable COPRs so they don't end up enabled on the final image:
-# dnf5 -y copr disable ublue-os/staging
+#### Enable SystemD unit files
