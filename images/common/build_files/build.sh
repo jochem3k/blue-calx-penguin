@@ -14,45 +14,58 @@ dnf5 -y copr enable jsbillings/netbird
 dnf5 -y copr enable imput/helium
 
 dnf5 install -y \
+adwaita-mono-fonts \
+bat \
+btop \
+duf \
+dust \
+eza \
+fastfetch \
 firewall-config \
 fish \
 fprintd-pam \
-git-credential-libsecret \
+fresh \
+fzf \
 gh \
 ghostty \
-kitty \
+git-credential-libsecret \
 google-croscore-arimo-fonts \
-google-croscore-tinos-fonts \
 google-croscore-cousine-fonts \
-google-crosextra-carlito-fonts \
+google-croscore-tinos-fonts \
 google-crosextra-caladea-fonts \
+google-crosextra-carlito-fonts \
 helium-bin \
+iperf3 \
+jetbrains-mono-fonts \
+kitty \
 netbird-client \
 netbird-ui \
+nerdfontssymbolsonly-nerd-fonts \
 p7zip \
 p7zip-plugins \
+ripgrep \
 sshfs \
 steam-devices \
 system-config-printer \
 ublue-os-just \
 unrar \
 uupd \
-fzf \
-ripgrep \
-eza \
-bat \
-zoxide \
-btop \
-duf \
-dust \
-fresh \
-iperf3 \
-fastfetch
+zoxide
+
+dnf5 remove -y \
+firefox \
+firefox-langpacks
+
+# Update font cache
+fc-cache -f /usr/share/fonts
 
 # Cleanup DNF metadata
-
 dnf5 clean all
 rm -rf /var/cache/dnf5 /var/cache/libdnf5 /tmp/*
+
+# Flatpak list enable
+chmod +x /usr/libexec/cerulean-flatpak-sync.sh
+systemctl enable cerulean-flatpak-sync.service
 
 
 #### Enable SystemD unit files

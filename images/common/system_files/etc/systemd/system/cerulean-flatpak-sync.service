@@ -1,0 +1,14 @@
+[Unit]
+Description=Provision Default System Flatpaks
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=!/var/lib/cerulean-flatpak-provisioned
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/cerulean-flatpak-sync.sh
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
