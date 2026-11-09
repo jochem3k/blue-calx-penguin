@@ -12,7 +12,7 @@ source /ctx/common/build_files/build.sh
 # Packages can be installed from any enabled yum repo on the image.
 # RPMfusion repos are available by default in ublue main images
 
-# Example: install desktop-only packages here
+# Example: install thinkpad-only packages here
 # dnf5 install -y steam
 
 # Use a COPR Example:

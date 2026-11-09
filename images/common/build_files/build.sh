@@ -9,20 +9,57 @@ cp -avf "/ctx/common/system_files"/. /
 ### Install packages (shared across all machines)
 
 # Packages can be installed from any enabled yum repo on the image.
-# RPMfusion repos are available by default in ublue main images
-# List of rpmfusion packages can be found here:
-# https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/43/x86_64/repoview/index.html&protocol=https&redirect=1
 
-# this installs a package from fedora repos
-dnf5 install -y tmux
+dnf5 -y copr enable jsbillings/netbird
+dnf5 -y copr enable imput/helium
 
-# Use a COPR Example:
-#
-# dnf5 -y copr enable ublue-os/staging
-# dnf5 -y install package
-# Disable COPRs so they don't end up enabled on the final image:
-# dnf5 -y copr disable ublue-os/staging
+dnf5 install -y \
+firewall-config \
+fish \
+fprintd-pam \
+git-credential-libsecret \
+gh \
+ghostty \
+kitty \
+google-croscore-arimo-fonts \
+google-croscore-tinos-fonts \
+google-croscore-cousine-fonts \
+google-crosextra-carlito-fonts \
+google-crosextra-caladea-fonts \
+helium-bin \
+netbird-client \
+netbird-ui \
+p7zip \
+p7zip-plugins \
+sshfs \
+steam-devices \
+system-config-printer \
+ublue-os-just \
+unrar \
+uupd \
+fzf \
+ripgrep \
+eza \
+bat \
+zoxide \
+btop \
+duf \
+dust \
+fresh \
+iperf3 \
+fastfetch
 
-#### Example for enabling a System Unit File
+# Cleanup DNF metadata
+
+dnf5 clean all
+rm -rf /var/cache/dnf5 /var/cache/libdnf5 /tmp/*
+
+
+#### Enable SystemD unit files
 
 systemctl enable podman.socket
+systemctl enable netbird.service
+systemctl enable uupd.timer
+systemctl enable cups.service
+systemctl mask NetworkManager-wait-online.service
+systemctl --global enable netbirdui.service

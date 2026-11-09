@@ -29,7 +29,7 @@ FROM ghcr.io/ublue-os/bazzite:stable
 
 ### MODIFICATIONS
 ## The ctx stage puts shared files at /ctx/common/ and this machine's files at /ctx/.
-## /ctx/build_files/build.sh sources the common script, then applies desktop-specific tweaks.
+## /ctx/build_files/build.sh sources the common script, then applies thinkpad-specific tweaks.
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
