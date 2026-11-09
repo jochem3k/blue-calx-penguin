@@ -1,0 +1,42 @@
+# Allow build scripts to be referenced without being copied into the final image
+FROM scratch AS ctx
+COPY images/common/build_files /common/build_files
+COPY images/common/system_files /common/system_files
+COPY images/thinkpad/build_files /build_files
+COPY images/thinkpad/system_files /system_files
+
+# Base Image (swap per machine — e.g. bazzite for desktop, aurora for thinkpad)
+FROM ghcr.io/ublue-os/bazzite:stable
+## Other possible base images include:
+# FROM ghcr.io/ublue-os/bazzite:testing
+# FROM ghcr.io/ublue-os/aurora:stable
+# FROM ghcr.io/ublue-os/bluefin-nvidia-open:stable
+#
+# Universal Blue Images: https://github.com/orgs/ublue-os/packages
+# Fedora base image: quay.io/fedora/fedora-bootc:44
+# CentOS base images: quay.io/centos-bootc/centos-bootc:stream10
+
+### [IM]MUTABLE /opt
+## Some bootable images, like Fedora, have /opt symlinked to /var/opt, in order to
+## make it mutable/writable for users. However, some packages write files to this directory,
+## thus its contents might be wiped out when bootc deploys an image, making it troublesome for
+## some packages. Eg, google-chrome, docker-desktop.
+##
+## Uncomment the following line if one desires to make /opt immutable and be able to be used
+## by the package manager.
+
+# RUN rm /opt && mkdir /opt
+
+### MODIFICATIONS
+## The ctx stage puts shared files at /ctx/common/ and this machine's files at /ctx/.
+## /ctx/build_files/build.sh sources the common script, then applies desktop-specific tweaks.
+
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    /ctx/build_files/build.sh
+
+### LINTING
+## Verify final image and contents are correct.
+RUN bootc container lint

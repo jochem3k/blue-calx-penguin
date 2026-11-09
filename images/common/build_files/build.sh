@@ -2,10 +2,11 @@
 
 set -ouex pipefail
 
-# Copy the contents of system_files/ of the git repo to /
-cp -avf "/ctx/system_files"/. /
+# Copy the COMMON system_files into the image
+# (mounted at /ctx/common/ by the machine's Containerfile)
+cp -avf "/ctx/common/system_files"/. /
 
-### Install packages
+### Install packages (shared across all machines)
 
 # Packages can be installed from any enabled yum repo on the image.
 # RPMfusion repos are available by default in ublue main images
