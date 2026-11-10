@@ -2,9 +2,9 @@
 
 set -ouex pipefail
 
-# Copy the COMMON system_files into the image
+# Copy the GNOME system_files into the image
 # (mounted at /ctx/common/ by the machine's Containerfile)
-cp -avf "/ctx/common/system_files"/. /
+cp -avf "/ctx/gnome/system_files"/. /
 
 ### Install packages (shared across all machines)
 

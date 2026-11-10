@@ -3,9 +3,8 @@
 set -ouex pipefail
 
 # Run the shared customizations first:
-# - copies common system_files from /ctx/common/system_files to /
-# - installs shared packages (tmux, etc.)
 source /ctx/common/build_files/build.sh
+source /ctx/gnome/build_files/build.sh
 
 ### Desktop-specific customizations below ###
 

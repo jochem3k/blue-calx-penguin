@@ -2,19 +2,13 @@
 FROM scratch AS ctx
 COPY images/common/build_files /common/build_files
 COPY images/common/system_files /common/system_files
+COPY images/gnome/build_files /common/build_files
+COPY images/gnome/system_files /common/system_files
 COPY images/thinkpad/build_files /build_files
 COPY images/thinkpad/system_files /system_files
 
 # Base Image (swap per machine — e.g. bazzite for desktop, aurora for thinkpad)
 FROM ghcr.io/blue-build/base-images/fedora-silverblue-nvidia:latest
-## Other possible base images include:
-# FROM ghcr.io/ublue-os/bazzite:testing
-# FROM ghcr.io/ublue-os/aurora:stable
-# FROM ghcr.io/ublue-os/bluefin-nvidia-open:stable
-#
-# Universal Blue Images: https://github.com/orgs/ublue-os/packages
-# Fedora base image: quay.io/fedora/fedora-bootc:44
-# CentOS base images: quay.io/centos-bootc/centos-bootc:stream10
 
 ### [IM]MUTABLE /opt
 ## Some bootable images, like Fedora, have /opt symlinked to /var/opt, in order to
