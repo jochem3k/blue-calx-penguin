@@ -6,7 +6,7 @@ COPY images/thinkpad/build_files /build_files
 COPY images/thinkpad/system_files /system_files
 
 # Base Image (swap per machine — e.g. bazzite for desktop, aurora for thinkpad)
-FROM ghcr.io/blue-build/base-images/fedora-silverblue-nvidia
+FROM ghcr.io/blue-build/base-images/fedora-silverblue-nvidia:latest
 ## Other possible base images include:
 # FROM ghcr.io/ublue-os/bazzite:testing
 # FROM ghcr.io/ublue-os/aurora:stable

@@ -56,6 +56,9 @@ dnf5 remove -y \
 firefox \
 firefox-langpacks
 
+dnf5 -y copr disable jsbillings/netbird
+dnf5 -y copr disable imput/helium
+
 # Update font cache
 fc-cache -f /usr/share/fonts
 
