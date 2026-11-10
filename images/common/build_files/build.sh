@@ -12,6 +12,7 @@ cp -avf "/ctx/common/system_files"/. /
 
 dnf5 -y copr enable jsbillings/netbird
 dnf5 -y copr enable imput/helium
+sudo dnf install -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release terra-gpg-keys
 
 dnf5 install -y \
 adwaita-mono-fonts \
@@ -47,7 +48,6 @@ ripgrep \
 sshfs \
 steam-devices \
 system-config-printer \
-terra-release \
 ublue-os-just \
 unrar \
 uupd \

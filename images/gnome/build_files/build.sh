@@ -6,7 +6,7 @@ set -ouex pipefail
 # (mounted at /ctx/common/ by the machine's Containerfile)
 cp -avf "/ctx/gnome/system_files"/. /
 
-### Install packages (shared across all machines)
+### Install packages (shared across all gnome machines)
 
 # Packages can be installed from any enabled yum repo on the image.
 
