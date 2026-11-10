@@ -43,6 +43,7 @@ rm -rf /var/cache/dnf5 /var/cache/libdnf5 /tmp/*
 
 # Compile glib schemas (picks up any *.gschema.override)
 glib-compile-schemas /usr/share/glib-2.0/schemas/
+dconf update
 
 
 
