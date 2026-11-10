@@ -9,8 +9,9 @@ source /ctx/common/build_files/build.sh
 
 ### Thinkpad-specific customizations below ###
 
-dnf5 brightnessctl -y \
-playerctl \
+dnf5 install -y \
+brightnessctl \
+playerctl
 
 # Packages can be installed from any enabled yum repo on the image.
 
