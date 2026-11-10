@@ -47,6 +47,7 @@ ripgrep \
 sshfs \
 steam-devices \
 system-config-printer \
+terra-release \
 ublue-os-just \
 unrar \
 uupd \
