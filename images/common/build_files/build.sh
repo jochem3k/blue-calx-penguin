@@ -6,6 +6,13 @@ set -ouex pipefail
 # (mounted at /ctx/common/ by the machine's Containerfile)
 cp -avf "/ctx/common/system_files"/. /
 
+### Fix /opt symlink for build-time RPM installs
+## Fedora bootc symlinks /opt -> /var/opt, which is dangling in the build
+## container and breaks RPMs that install into /opt (e.g. helium-bin).
+## Replace it with a real directory for the build; bootc re-establishes
+## the /var linkage on the deployed system.
+rm -f /opt && mkdir -p /opt
+
 ### Install packages (shared across all machines)
 
 # Packages can be installed from any enabled yum repo on the image.
