@@ -18,6 +18,7 @@ dnf5 install -y \
 adwaita-mono-fonts \
 bat \
 btop \
+chezmoi \
 duf \
 dust \
 eza \
