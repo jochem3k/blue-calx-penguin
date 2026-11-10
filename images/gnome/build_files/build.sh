@@ -32,10 +32,18 @@ gnome-shell-extension-window-list
 dnf5 clean all
 rm -rf /var/cache/dnf5 /var/cache/libdnf5 /tmp/*
 
-### Bluebuild Gnome extensions module ("Caffeine","Just Perfection","Clipboard Indicator","AppIndicator and KStatusNotifierItem Support","Tiling Shell","Quick Close in Overview")
+### Bluebuild Gnome extensions module ("Caffeine","Just Perfection","Clipboard Indicator","AppIndicator and KStatusNotifierItem Support","Tiling Shell","Quick Close in Overview").
 
 /tmp/scripts/run_module.sh 'gnome-extensions' \
   '{"type":"gnome-extensions","install":["517","3843","779","615","7065","352"]}'
+
+# In case numeric IDs dont work.
+# /tmp/scripts/run_module.sh 'gnome-extensions' \
+#   '{"type":"gnome-extensions","install":["Caffeine","Just Perfection","Clipboard Indicator","AppIndicator and KStatusNotifierItem Support","Tiling Shell","Quick Close in Overview"]}'
+
+# Compile glib schemas (picks up any *.gschema.override)
+glib-compile-schemas /usr/share/glib-2.0/schemas/
+
 
 
 #### Enable SystemD unit files
