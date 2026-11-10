@@ -25,6 +25,15 @@ FROM ghcr.io/blue-build/base-images/fedora-silverblue-nvidia-open:latest
 ## The ctx stage puts shared files at /ctx/common/ and this machine's files at /ctx/.
 ## /ctx/build_files/build.sh sources the common script, then applies desktop-specific tweaks.
 
+# Bluebuild Gnome extensions module mounts
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
+    --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
+    --mount=type=cache,dst=/var/cache \
+    --mount=type=cache,dst=/var/log \
+    --mount=type=tmpfs,dst=/tmp \
+    /ctx/build_files/build.sh
+
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
