@@ -30,7 +30,7 @@ gnome-shell-extension-window-list
 
 # Cleanup DNF metadata
 dnf5 clean all
-rm -rf /var/cache/dnf5 /var/cache/libdnf5 /tmp/*
+rm -rf /var/cache/dnf5 /var/cache/libdnf5
 
 ### Bluebuild Gnome extensions module ("Caffeine","Just Perfection","Clipboard Indicator","AppIndicator and KStatusNotifierItem Support","Tiling Shell","Quick Close in Overview").
 

@@ -14,4 +14,8 @@ dnf5 install -y \
 brightnessctl \
 playerctl
 
+# Cleanup DNF metadata
+dnf5 clean all
+rm -rf /var/cache/dnf5 /var/cache/libdnf5
+
 #### Enable SystemD unit files

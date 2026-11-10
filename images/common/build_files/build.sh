@@ -75,7 +75,7 @@ fc-cache -f /usr/share/fonts
 
 # Cleanup DNF metadata
 dnf5 clean all
-rm -rf /var/cache/dnf5 /var/cache/libdnf5 /tmp/*
+rm -rf /var/cache/dnf5 /var/cache/libdnf5
 
 # Flatpak list enable
 chmod +x /usr/libexec/cerulean-flatpak-sync.sh
