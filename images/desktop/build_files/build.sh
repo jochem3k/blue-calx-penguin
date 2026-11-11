@@ -12,6 +12,9 @@ source /ctx/gnome/build_files/build.sh
 
 ### Desktop-specific customizations below ###
 
+# desktop:
+echo "cerulean-city-customs-desktop" > /usr/share/cerulean/image-name
+
 # Packages can be installed from any enabled yum repo on the image.
 
 

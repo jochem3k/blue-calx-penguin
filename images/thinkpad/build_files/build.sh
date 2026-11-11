@@ -12,6 +12,9 @@ source /ctx/gnome/build_files/build.sh
 
 ### Thinkpad-specific customizations below ###
 
+# thinkpad:
+echo "cerulean-city-customs-thinkpad" > /usr/share/cerulean/image-name
+
 # Packages can be installed from any enabled yum repo on the image.
 
 dnf5 install -y \

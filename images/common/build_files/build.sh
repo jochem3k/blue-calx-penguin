@@ -13,6 +13,10 @@ cp -avf "/ctx/common/system_files"/. /
 ## the /var linkage on the deployed system.
 rm -f /opt && mkdir -p /opt
 
+### Stamp image metadata for unprivileged consumers (fastfetch)
+mkdir -p /usr/share/cerulean
+date -u +'%Y-%m-%dT%H:%M:%SZ' > /usr/share/cerulean/build-timestamp
+
 ### Install packages (shared across all machines)
 
 # Packages can be installed from any enabled yum repo on the image.
