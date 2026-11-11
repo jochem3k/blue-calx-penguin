@@ -10,7 +10,7 @@ Not a template or a general-purpose image; built for my hardware.
 | cerulean-city-customs-thinkpad | ThinkPad (Maxwell GPU, proprietary driver) | fedora-silverblue-nvidia |
 
 ## Install
-`bootc switch to ghcr.io/jochem3k/cerulean-city-customs-<machine>:latest`
+`sudo bootc switch ghcr.io/jochem3k/cerulean-city-customs-<machine>:latest`
 (from an existing bootc system, or via the ISO built by the Justfile)
 
 ## Build
