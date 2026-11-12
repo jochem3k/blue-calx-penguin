@@ -1,3 +1,6 @@
+# Set Fedora version
+ARG FEDORA_VERSION=45
+
 # Allow build scripts to be referenced without being copied into the final image
 FROM scratch AS ctx
 COPY images/common/build_files /common/build_files
@@ -8,7 +11,8 @@ COPY images/thinkpad/build_files /build_files
 COPY images/thinkpad/system_files /system_files
 
 # Base Image
-FROM ghcr.io/blue-build/base-images/fedora-silverblue-nvidia:latest
+FROM ghcr.io/ublue-os/akmods-nvidia:main-${FEDORA_VERSION} AS nvidia-akmods
+FROM ghcr.io/ublue-os/silverblue-main:${FEDORA_VERSION}
 
 ### [IM]MUTABLE /opt
 ## Some bootable images, like Fedora, have /opt symlinked to /var/opt, in order to
@@ -25,10 +29,12 @@ FROM ghcr.io/blue-build/base-images/fedora-silverblue-nvidia:latest
 ## The ctx stage puts shared files at /ctx/common/ and this machine's files at /ctx/.
 ## /ctx/build_files/build.sh sources the common script, then applies desktop-specific tweaks.
 ## Bluebuild Gnome extension module is mounted, default sequence commented out below.
+## Nvidia AKMODS mounted
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
     --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
+    --mount=type=bind,from=nvidia-akmods,source=/rpms,target=/tmp/akmods-rpms \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
