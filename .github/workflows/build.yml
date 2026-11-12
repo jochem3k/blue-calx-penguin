@@ -15,7 +15,7 @@ env:
 
 jobs:
   build_push:
-    name: Build and push ${{ matrix.machine }}
+    name: Build ${{ matrix.machine }}
     runs-on: ubuntu-26.04
 
     strategy:
