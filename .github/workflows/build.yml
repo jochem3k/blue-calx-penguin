@@ -8,8 +8,6 @@ on:
      - main
    paths:
      - 'images/**'
-   paths-ignore:
-     - '**/README.md'
   workflow_dispatch:
 
 env:
