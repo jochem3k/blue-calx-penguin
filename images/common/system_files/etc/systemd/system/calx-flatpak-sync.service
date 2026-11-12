@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/libexec/cerulean-flatpak-sync.sh
+ExecStart=/usr/libexec/calx-flatpak-sync.sh
 StandardOutput=journal
 StandardError=journal
 

@@ -13,7 +13,7 @@ source /ctx/gnome/build_files/build.sh
 ### Thinkpad-specific customizations below ###
 
 # thinkpad:
-echo "cerulean-city-customs-thinkpad" > /usr/share/cerulean/image-name
+echo "blue-calx-penguin-thinkpad" > /usr/share/calx/image-name
 
 # Packages can be installed from any enabled yum repo on the image.
 

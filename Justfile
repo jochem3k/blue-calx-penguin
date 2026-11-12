@@ -1,4 +1,4 @@
-set dotenv-filename := "cerulean-city-customs.env"
+set dotenv-filename := "blue-calx-penguin.env"
 set dotenv-load
 
 export image_name := env_var("IMAGE_NAME")
@@ -79,7 +79,7 @@ sudoif command *args:
 #
 # Arguments:
 #   $target_image - The name of the image to build (default: $image_name).
-#                   In CI this is e.g. "cerulean-city-customs-desktop".
+#                   In CI this is e.g. "blue-calx-penguin-desktop".
 #   $tag - The tag for the image (default: $default_tag).
 #   $containerfile - Path to the Containerfile to build
 #                    (default: "Containerfile"; per-machine examples:
@@ -93,7 +93,7 @@ sudoif command *args:
 #
 # Example usage:
 #   just build myimage mytag
-#   just build cerulean-city-customs-desktop latest images/desktop/Containerfile
+#   just build blue-calx-penguin-desktop latest images/desktop/Containerfile
 #
 # This will build an image 'myimage:mytag'
 #

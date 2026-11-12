@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-MANIFEST_DIR="/usr/share/cerulean"
+MANIFEST_DIR="/usr/share/calx"
 
 # Ensure Flathub exists
 flatpak remote-add --if-not-exists --system flathub https://dl.flathub.org/repo/flathub.flatpakrepo >/dev/null 2>&1 || true

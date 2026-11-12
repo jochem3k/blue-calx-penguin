@@ -14,8 +14,8 @@ cp -avf "/ctx/common/system_files"/. /
 rm -f /opt && mkdir -p /opt
 
 ### Stamp image metadata for unprivileged consumers (fastfetch)
-mkdir -p /usr/share/cerulean
-date -u +'%Y-%m-%dT%H:%M:%SZ' > /usr/share/cerulean/build-timestamp
+mkdir -p /usr/share/calx
+date -u +'%Y-%m-%dT%H:%M:%SZ' > /usr/share/calx/build-timestamp
 
 ### Install packages (shared across all machines)
 
@@ -82,8 +82,8 @@ dnf5 clean all
 rm -rf /var/cache/dnf5 /var/cache/libdnf5
 
 # Flatpak list enable
-chmod +x /usr/libexec/cerulean-flatpak-sync.sh
-systemctl enable cerulean-flatpak-sync.service
+chmod +x /usr/libexec/calx-flatpak-sync.sh
+systemctl enable calx-flatpak-sync.service
 
 
 #### Enable SystemD unit files

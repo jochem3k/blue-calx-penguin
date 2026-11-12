@@ -1,4 +1,4 @@
-# cerulean-city-customs
+# blue-calx-penguin
 
 Custom Fedora Silverblue-based bootc images for my machines.
 Not a template or a general-purpose image; built for my hardware.
@@ -6,11 +6,11 @@ Not a template or a general-purpose image; built for my hardware.
 ## Images
 | Image | Machine | Base |
 |---|---|---|
-| cerulean-city-customs-desktop | Desktop (Nvidia, open kernel module) | fedora-silverblue-nvidia-open |
-| cerulean-city-customs-thinkpad | ThinkPad (Maxwell GPU, proprietary driver) | fedora-silverblue-nvidia |
+| blue-calx-penguin-desktop | Desktop (Nvidia, open kernel module) | fedora-silverblue-nvidia-open |
+| blue-calx-penguin-thinkpad | ThinkPad (Maxwell GPU, proprietary driver) | fedora-silverblue-nvidia |
 
 ## Install
-`sudo bootc switch ghcr.io/jochem3k/cerulean-city-customs-<machine>:latest`
+`sudo bootc switch ghcr.io/jochem3k/blue-calx-penguin-<machine>:latest`
 (from an existing bootc system, or via the ISO built by the Justfile)
 
 ## Build
