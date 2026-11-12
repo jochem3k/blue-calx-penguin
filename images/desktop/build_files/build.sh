@@ -21,3 +21,13 @@ echo "cerulean-city-customs-desktop" > /usr/share/cerulean/image-name
 #### Enable SystemD unit files
 
 systemctl enable var-mnt-data.mount
+
+#### Rebuild initramfs because of akmods
+
+IMAGE_NAME=silverblue /tmp/akmods-rpms/ublue-os/nvidia-install.sh
+
+KERNEL_VERSION="$(rpm -q --queryformat='%{VERSION}-%{RELEASE}.%{ARCH}' kernel-core)"
+export DRACUT_NO_XATTR=1
+dracut --no-hostonly --kver "$KERNEL_VERSION" --reproducible --add ostree \
+    -f "/usr/lib/modules/$KERNEL_VERSION/initramfs.img"
+chmod 0600 "/usr/lib/modules/$KERNEL_VERSION/initramfs.img"
