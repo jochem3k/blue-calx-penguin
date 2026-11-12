@@ -6,8 +6,8 @@ Not a template or a general-purpose image; built for my hardware.
 ## Images
 | Image | Machine | Base |
 |---|---|---|
-| blue-calx-penguin-desktop | Desktop (Nvidia, open kernel module) | fedora-silverblue-nvidia-open |
-| blue-calx-penguin-thinkpad | ThinkPad (Maxwell GPU, proprietary driver) | fedora-silverblue-nvidia |
+| blue-calx-penguin-desktop | Desktop (Nvidia, open kernel module) | silverblue-main + akmods-nvidia-open |
+| blue-calx-penguin-thinkpad | ThinkPad (Maxwell GPU, proprietary driver) | silverblue-main + akmods-nvidia-lts |
 
 ## Install
 `sudo bootc switch ghcr.io/jochem3k/blue-calx-penguin-<machine>:latest`
