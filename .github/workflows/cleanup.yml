@@ -1,7 +1,7 @@
 name: Cleanup
 on:
   schedule:
-    - cron: "00 1 * * 0" # 01:00m UTC
+    - cron: "00 1 * * 0" # 01:00 UTC
   workflow_dispatch:
 
 jobs:
@@ -9,6 +9,7 @@ jobs:
     name: Cleanup old images
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       packages: write
 
     strategy:
@@ -24,5 +25,5 @@ jobs:
         with:
           package-name: ${{ matrix.package }}
           package-type: "container"
-          min-versions-to-keep: 5
+          min-versions-to-keep: 15
           delete-only-untagged-versions: "false"
