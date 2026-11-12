@@ -11,7 +11,7 @@ COPY images/thinkpad/build_files /build_files
 COPY images/thinkpad/system_files /system_files
 
 # Base Image
-FROM ghcr.io/ublue-os/akmods-nvidia-lts:main-${FEDORA_VERSION} AS nvidia-akmods
+FROM ghcr.io/ublue-os/akmods-nvidia:main-${FEDORA_VERSION} AS nvidia-akmods
 FROM ghcr.io/ublue-os/silverblue-main:${FEDORA_VERSION}
 
 ### [IM]MUTABLE /opt
