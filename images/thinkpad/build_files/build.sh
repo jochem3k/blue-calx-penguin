@@ -2,13 +2,13 @@
 
 set -ouex pipefail
 
-# Copy this machine's system_files into the image
-# (mounted at /ctx/system_files by the machine's Containerfile)
-cp -avf "/ctx/system_files"/. /
-
 # Run the shared customizations first:
 source /ctx/common/build_files/build.sh
 source /ctx/gnome/build_files/build.sh
+
+# Copy this machine's system_files into the image
+# (mounted at /ctx/system_files by the machine's Containerfile)
+cp -avf "/ctx/system_files"/. /
 
 ### Thinkpad-specific customizations below ###
 
