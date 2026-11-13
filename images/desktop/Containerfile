@@ -5,10 +5,11 @@ ARG FEDORA_VERSION=45
 FROM scratch AS ctx
 COPY images/common/build_files /common/build_files
 COPY images/common/system_files /common/system_files
-COPY images/gnome/build_files /gnome/build_files
-COPY images/gnome/system_files /gnome/system_files
 COPY images/desktop/build_files /build_files
 COPY images/desktop/system_files /system_files
+COPY images/gnome/build_files /gnome/build_files
+COPY images/gnome/system_files /gnome/system_files
+
 
 # Base Image
 FROM ghcr.io/ublue-os/akmods-nvidia-open:main-${FEDORA_VERSION} AS nvidia-akmods
