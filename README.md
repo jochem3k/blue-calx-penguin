@@ -7,7 +7,7 @@ Not a template or a general-purpose image; built for my hardware.
 | Image | Machine | Base |
 |---|---|---|
 | blue-calx-penguin-desktop | Desktop (Nvidia, open kernel module) | silverblue-main + akmods-nvidia-open |
-| blue-calx-penguin-thinkpad | ThinkPad (Maxwell GPU, proprietary driver) | silverblue-main + akmods-nvidia-lts |
+| blue-calx-penguin-thinkpad | ThinkPad (Maxwell GPU, nouveau driver) | silverblue-main |
 
 ## Install
 `sudo bootc switch ghcr.io/jochem3k/blue-calx-penguin-<machine>:latest`
