@@ -1,0 +1,3 @@
+[Environment]
+NVD_BACKEND=direct
+MOZ_ENABLE_WAYLAND=1
