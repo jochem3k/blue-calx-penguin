@@ -5,7 +5,9 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
+ExecStartPre=/usr/bin/bash -c 'until curl -fsI --max-time 5 https://dl.flathub.org/repo/flathub.flatpakrepo >/dev/null; do sleep 5; done'
 ExecStart=/usr/libexec/calx-flatpak-sync.sh
+TimeoutStartSec=15min
 StandardOutput=journal
 StandardError=journal
 
