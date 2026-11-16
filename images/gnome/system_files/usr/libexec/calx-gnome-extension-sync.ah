@@ -1,4 +1,0 @@
-#!/bin/bash
-set -euo pipefail
-
-grep -hvE '^\s*(#|$)' /usr/share/calx/extensions-*.list | xargs -r gext install --force
