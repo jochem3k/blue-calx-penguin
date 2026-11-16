@@ -1,0 +1,14 @@
+[Unit]
+Description=Provision and Update Default GNOME Shell Extensions
+After=graphical-session.target network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStartPre=/usr/bin/bash -c 'until curl -fsI --max-time 5 https://extensions.gnome.org >/dev/null; do sleep 5; done'
+ExecStart=/usr/libexec/calx-gnome-extensions-sync.sh
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=graphical-session.target
