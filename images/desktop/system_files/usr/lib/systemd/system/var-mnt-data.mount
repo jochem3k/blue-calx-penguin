@@ -5,7 +5,7 @@ After=local-fs.target
 [Mount]
 What=/dev/disk/by-label/Data
 Where=/var/mnt/data
-Type=auto
+Type=btrfs
 Options=defaults,nofail,noatime,lazytime,compress=zstd:3,ssd
 
 

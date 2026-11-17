@@ -73,6 +73,7 @@ firefox-langpacks
 dnf5 -y copr disable jsbillings/netbird
 dnf5 -y copr disable imput/helium
 dnf5 -y copr disable ublue-os/packages
+dnf5 config-manager setopt 'terra*.enabled=0'
 
 # Update font cache
 fc-cache -f /usr/share/fonts
