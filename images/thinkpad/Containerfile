@@ -30,10 +30,11 @@ FROM ghcr.io/ublue-os/silverblue-main:${FEDORA_VERSION}
 ## /ctx/build_files/build.sh sources the common script, then applies desktop-specific tweaks.
 ## Bluebuild Gnome extension & Flatpak modules are mounted.
 
+COPY --from=ghcr.io/blue-build/nushell-image:latest /nu /usr/libexec/bluebuild/nu
+
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
     --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
-    --mount=type=bind,from=ghcr.io/blue-build/cli:latest,src=/,dst=/tmp/bb-cli \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \

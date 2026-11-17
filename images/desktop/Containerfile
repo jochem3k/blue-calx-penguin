@@ -32,10 +32,11 @@ FROM ghcr.io/ublue-os/silverblue-main:${FEDORA_VERSION}
 ## Bluebuild Gnome extension & Flatpak modules are mounted.
 ## Nvidia AKMODS mounted
 
+COPY --from=ghcr.io/blue-build/nushell-image:latest /nu /usr/libexec/bluebuild/nu
+
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=bind,from=ghcr.io/blue-build/modules:latest,src=/modules,dst=/tmp/modules,rw \
     --mount=type=bind,from=ghcr.io/blue-build/cli/build-scripts:latest,src=/scripts/,dst=/tmp/scripts/ \
-    --mount=type=bind,from=ghcr.io/blue-build/cli:latest,src=/,dst=/tmp/bb-cli \
     --mount=type=bind,from=nvidia-akmods,source=/rpms,target=/tmp/akmods-rpms \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
