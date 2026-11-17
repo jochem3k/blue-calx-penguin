@@ -15,12 +15,12 @@ date -u +'%Y-%m-%dT%H:%M:%SZ' > /usr/share/calx/build-timestamp
 
 ### Install packages (shared across all machines)
 
-# Packages can be installed from any enabled yum repo on the image.
-
+# Add repositories
 dnf5 -y copr enable jsbillings/netbird
 dnf5 -y copr enable imput/helium
 dnf5 install -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release terra-gpg-keys
 
+# Install DNF packages
 dnf5 install -y \
 adwaita-mono-fonts \
 bat \
@@ -59,10 +59,12 @@ system-config-printer \
 unrar \
 zoxide
 
+# Remove DNF packages
 dnf5 remove -y \
 firefox \
 firefox-langpacks
 
+# Remove repositories
 dnf5 -y copr disable jsbillings/netbird
 dnf5 -y copr disable imput/helium
 
@@ -73,14 +75,52 @@ fc-cache -f /usr/share/fonts
 dnf5 clean all
 rm -rf /var/cache/dnf5 /var/cache/libdnf5
 
-# Copy the COMMON system_files into the image
-# (mounted at /ctx/common/ by the machine's Containerfile)
+# Run Bluebuild Flatpak module
+/tmp/scripts/run_module.sh 'default-flatpaks' '{
+  "type": "default-flatpaks",
+  "configurations": [
+    {
+      "notify": true,
+      "scope": "system",
+      "repo": {
+        "url": "https://dl.flathub.org/repo/flathub.flatpakrepo",
+        "name": "flathub",
+        "title": "Flathub (system)"
+      },
+      "install": [
+        "io.github.Foldex.AdwSteamGtk",
+        "com.bitwarden.desktop",
+        "com.rafaelmardojai.Blanket",
+        "hu.irl.cameractrls",
+        "com.github.finefindus.eyedropper",
+        "org.filezillaproject.Filezilla",
+        "com.github.tchx84.Flatseal",
+        "org.gimp.GIMP",
+        "io.gitlab.adhami3310.Impression",
+        "org.libreoffice.LibreOffice",
+        "com.mojang.Minecraft",
+        "md.obsidian.Obsidian",
+        "com.vysp3r.ProtonPlus",
+        "net.nokyan.Resources",
+        "com.rustdesk.RustDesk",
+        "com.spotify.Client",
+        "com.valvesoftware.Steam",
+        "io.github.flattool.Warehouse",
+        "dev.zed.Zed",
+        "app.zen_browser.zen",
+        "io.github.kolunmi.Bazaar",
+        "org.mozilla.firefox",
+        "com.usebottles.bottles",
+        "com.discordapp.Discord"
+      ]
+    }
+  ]
+}'
+
+### Copy the COMMON system_files into the image
+### (mounted at /ctx/common/ by the machine's Containerfile)
+
 cp -avf "/ctx/common/system_files"/. /
-
-# Flatpak list enable
-chmod +x /usr/libexec/calx-flatpak-sync.sh
-systemctl enable calx-flatpak-sync.service
-
 
 #### Enable SystemD unit files
 

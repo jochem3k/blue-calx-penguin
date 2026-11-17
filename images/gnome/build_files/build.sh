@@ -6,17 +6,16 @@ set -ouex pipefail
 # (mounted at /ctx/gnome/ by the machine's Containerfile)
 cp -avf "/ctx/gnome/system_files"/. /
 
-### Install packages (shared across all gnome machines)
+### Install packages (shared across all Gnome machines)
 
-# Packages can be installed from any enabled yum repo on the image.
-
-
+# Install DNF packages
 dnf5 install -y \
 xdg-terminal-exec \
 gnome-tweaks \
 gnome-shell-extension-gsconnect \
 sushi
 
+# Remove DNF packages
 dnf5 remove -y \
 gnome-tour \
 yelp \
@@ -32,20 +31,34 @@ gnome-shell-extension-window-list
 dnf5 clean all
 rm -rf /var/cache/dnf5 /var/cache/libdnf5
 
+# Run Bluebuild Flatpak module
+/tmp/scripts/run_module.sh 'default-flatpaks' '{
+  "type": "default-flatpaks",
+  "configurations": [
+    {
+      "notify": false,
+      "scope": "system",
+      "install": [
+        "io.github.celluloid_player.Celluloid",
+        "com.mattjakeman.ExtensionManager",
+        "page.tesk.Refine",
+        "org.gnome.Calendar",
+        "org.gnome.Epiphany",
+        "org.gnome.Maps"
+      ]
+    }
+  ]
+}'
+
 ### Bluebuild Gnome extensions module ("Caffeine","Just Perfection","Clipboard Indicator","AppIndicator and KStatusNotifierItem Support","Tiling Shell","Quick Close in Overview").
 
 /tmp/scripts/run_module.sh 'gnome-extensions' \
   '{"type":"gnome-extensions","install":["517","3843","779","615","7065","352"]}'
 
-# In case numeric IDs dont work.
-# /tmp/scripts/run_module.sh 'gnome-extensions' \
-#   '{"type":"gnome-extensions","install":["Caffeine","Just Perfection","Clipboard Indicator","AppIndicator and KStatusNotifierItem Support","Tiling Shell","Quick Close in Overview"]}'
+### Compile glib schemas (picks up any *.gschema.override)
 
-# Compile glib schemas (picks up any *.gschema.override)
 glib-compile-schemas /usr/share/glib-2.0/schemas/
 dconf update
-
-
 
 #### Enable SystemD unit files
 
