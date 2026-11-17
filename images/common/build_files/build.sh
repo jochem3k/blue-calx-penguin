@@ -2,6 +2,10 @@
 
 set -ouex pipefail
 
+### Expose BlueBuild's Nushell interpreter for .nu modules
+mkdir -p /usr/libexec/bluebuild
+ln -sfn "$(dirname "$(find /tmp/bb-cli -name nu -type f -executable | head -n1)")" /usr/libexec/bluebuild/nu
+
 ### Fix /opt symlink for build-time RPM installs
 ## Fedora bootc symlinks /opt -> /var/opt, which is dangling in the build
 ## container and breaks RPMs that install into /opt (e.g. helium-bin).
