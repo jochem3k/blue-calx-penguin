@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -ouex pipefail
+export MODULE_DIRECTORY="/tmp/modules"
 
 ### Fix /opt symlink for build-time RPM installs
 ## Fedora bootc symlinks /opt -> /var/opt, which is dangling in the build
