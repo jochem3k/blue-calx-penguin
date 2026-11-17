@@ -1,6 +1,8 @@
 #!/bin/bash
 
 set -ouex pipefail
+
+### Expose mounted BlueBuild module path
 export MODULE_DIRECTORY="/tmp/modules"
 
 ### Fix /opt symlink for build-time RPM installs
@@ -19,6 +21,7 @@ date -u +'%Y-%m-%dT%H:%M:%SZ' > /usr/share/calx/build-timestamp
 # Add repositories
 dnf5 -y copr enable jsbillings/netbird
 dnf5 -y copr enable imput/helium
+dnf5 -y copr enable ublue-os/packages
 dnf5 install -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release terra-gpg-keys
 
 # Install DNF packages
@@ -58,6 +61,7 @@ sshfs \
 steam-devices \
 system-config-printer \
 unrar \
+uupd \
 zoxide
 
 # Remove DNF packages
@@ -68,6 +72,7 @@ firefox-langpacks
 # Remove repositories
 dnf5 -y copr disable jsbillings/netbird
 dnf5 -y copr disable imput/helium
+dnf5 -y copr disable ublue-os/packages
 
 # Update font cache
 fc-cache -f /usr/share/fonts
@@ -128,5 +133,6 @@ cp -avf "/ctx/common/system_files"/. /
 systemctl enable podman.socket
 systemctl enable netbird.service
 systemctl enable cups.service
+systemctl enable uupd.timer
 systemctl mask NetworkManager-wait-online.service
 systemctl --global enable netbirdui.service
