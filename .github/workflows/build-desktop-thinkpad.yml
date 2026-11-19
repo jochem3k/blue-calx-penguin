@@ -1,5 +1,5 @@
 ---
-name: Build container image
+name: Build desktop & thinkpad image
 on:
   schedule:
    - cron: "05 10 * * 2,4,6"  # 10:05am UTC tuesday, thursday and saturday
@@ -7,7 +7,10 @@ on:
    branches:
      - main
    paths:
-     - 'images/**'
+     - 'images/common/**'
+     - 'images/gnome/**'
+     - 'images/desktop/**'
+     - 'images/thinkpad/**'
   workflow_dispatch:
 
 env:
@@ -21,7 +24,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        machine: [desktop, thinkpad, server]
+        machine: [desktop, thinkpad]
 
     # Job-level so `matrix.machine` is in scope — without the machine suffix,
     # parallel matrix jobs would cancel each other out
