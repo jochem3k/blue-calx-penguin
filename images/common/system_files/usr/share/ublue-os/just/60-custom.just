@@ -22,8 +22,3 @@ push msg="update dotfiles":
     @chezmoi git -- commit -m "{{ msg }}"
     @echo "📤 Pushing to remote..."
     @chezmoi git push
-
-# Update system, Flatpaks, and Distrobox via uupd
-[group('System')]
-upd:
-    @sudo /usr/bin/uupd
