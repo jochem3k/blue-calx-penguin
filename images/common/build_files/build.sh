@@ -131,7 +131,6 @@ cp -avf "/ctx/common/system_files"/. /
 
 #### Enable SystemD unit files
 
-systemctl enable podman.socket
 systemctl enable netbird.service
 systemctl enable cups.service
 systemctl enable uupd.timer
