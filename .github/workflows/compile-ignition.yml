@@ -1,0 +1,46 @@
+name: Compile ignition
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "butane/**.bu"
+  workflow_dispatch: {}
+
+jobs:
+  transpile:
+    name: Transpile Butane to Ignition
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Allows the runner to commit files back to your repo
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: compile-ignition
+        run: |
+          echo "Dynamically locating Butane files in subdirectories..."
+
+          # Recursively find all .bu files anywhere in the repository
+          find . -type f -name "*.bu" | while read -r file; do
+            # Strip the extension to create the output path in the same directory
+            output_name="${file%.bu}.ign"
+
+            echo "Compiling: $file -> $output_name"
+
+            # Run Butane container using paths relative to the repository root mount
+            docker run --rm -v "$(pwd)":/pwd -w /pwd quay.io/coreos/butane:release \
+              --pretty --strict "$file" -o "$output_name"
+          done
+
+          echo "All subdirectory compilations completed successfully."
+
+      - name: commit-ignition
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: automated butane to ignition translation [skip ci]"
+          file_pattern: "**.ign"

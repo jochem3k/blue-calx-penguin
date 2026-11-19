@@ -1,0 +1,67 @@
+{
+  "ignition": {
+    "version": "3.4.0"
+  },
+  "passwd": {
+    "groups": [
+      {
+        "name": "docker"
+      }
+    ],
+    "users": [
+      {
+        "groups": [
+          "wheel",
+          "docker"
+        ],
+        "name": "netbird",
+        "sshAuthorizedKeys": [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL+2ziXZaHbOE3RHbvmxpQtqgWaKVKzAW1ay/nQcaUSi jochem@desktop-jochem",
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH9S2P443VA/RLVZojYRGnRD49fV4jyxsbf8rX1I4Qen jochem@thinkpad-jochem",
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICDXG3kPJo+9zVti0TctqjNPrbXLbZrsTMqGYgE21hkL n8n",
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJCLrjQHqsgwHawlZ6o27uvOdOiopO+GB3+EAAaeUx4l conduit"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "directories": [
+      {
+        "group": {
+          "name": "netbird"
+        },
+        "path": "/var/opt/docker",
+        "user": {
+          "name": "netbird"
+        },
+        "mode": 493
+      }
+    ],
+    "files": [
+      {
+        "path": "/etc/hostname",
+        "contents": {
+          "compression": "",
+          "source": "data:,netbird"
+        },
+        "mode": 420
+      },
+      {
+        "path": "/etc/NetworkManager/system-connections/ens18.nmconnection",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/1TMwarCMBCF4f28y+0loZaK5ElKF2PmaAPNpCSj0rd3oYhuz/n5plhUES0VnSlJgDY3ku0bAmxBVRglNdQLR/wpZ7wTmtJ272fKsKVIyKw3XolFKlpzwR1954ax85337t/3dGXDg/fv49CTaPtdTi94+MCSGp9XCD0DAAD//9ASOByqAAAA"
+        },
+        "mode": 384
+      },
+      {
+        "path": "/etc/sudoers.d/netbird-passwordless",
+        "contents": {
+          "compression": "",
+          "source": "data:,netbird%20ALL%3D(ALL)%20NOPASSWD%3A%20ALL%0A"
+        },
+        "mode": 288
+      }
+    ]
+  }
+}

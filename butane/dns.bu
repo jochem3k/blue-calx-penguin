@@ -1,0 +1,54 @@
+variant: fcos
+version: 1.5.0
+passwd:
+  groups:
+    - name: docker
+  users:
+    - name: dns
+      groups:
+        - wheel
+        - docker
+      ssh_authorized_keys:
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL+2ziXZaHbOE3RHbvmxpQtqgWaKVKzAW1ay/nQcaUSi jochem@desktop-jochem
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH9S2P443VA/RLVZojYRGnRD49fV4jyxsbf8rX1I4Qen jochem@thinkpad-jochem
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICDXG3kPJo+9zVti0TctqjNPrbXLbZrsTMqGYgE21hkL n8n
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJCLrjQHqsgwHawlZ6o27uvOdOiopO+GB3+EAAaeUx4l conduit
+
+storage:
+  directories:
+    - path: /var/opt/docker
+      mode: 0755
+      user:
+        name: dns
+      group:
+        name: dns
+
+  files:
+    - path: /etc/hostname
+      mode: 0644
+      contents:
+        inline: dns
+
+    - path: /etc/NetworkManager/system-connections/ens18.nmconnection
+      mode: 0600
+      contents:
+        inline: |
+          [connection]
+          id=ens18
+          type=ethernet
+          interface-name=ens18
+
+          [ipv4]
+          method=manual
+          address1=192.168.2.253/24
+          gateway=192.168.2.254
+          dns=192.168.2.254;
+
+          [ipv6]
+          method=disabled
+
+    - path: /etc/sudoers.d/dns-passwordless
+      mode: 0440
+      contents:
+        inline: |
+          dns ALL=(ALL) NOPASSWD: ALL

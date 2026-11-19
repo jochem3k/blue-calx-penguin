@@ -1,0 +1,76 @@
+{
+  "ignition": {
+    "version": "3.4.0"
+  },
+  "passwd": {
+    "groups": [
+      {
+        "name": "docker"
+      }
+    ],
+    "users": [
+      {
+        "groups": [
+          "wheel",
+          "docker"
+        ],
+        "name": "docker-prod",
+        "sshAuthorizedKeys": [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL+2ziXZaHbOE3RHbvmxpQtqgWaKVKzAW1ay/nQcaUSi jochem@desktop-jochem",
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH9S2P443VA/RLVZojYRGnRD49fV4jyxsbf8rX1I4Qen jochem@thinkpad-jochem",
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICDXG3kPJo+9zVti0TctqjNPrbXLbZrsTMqGYgE21hkL n8n",
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJCLrjQHqsgwHawlZ6o27uvOdOiopO+GB3+EAAaeUx4l conduit"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "directories": [
+      {
+        "group": {
+          "name": "docker-prod"
+        },
+        "path": "/var/opt/docker",
+        "user": {
+          "name": "docker-prod"
+        },
+        "mode": 493
+      }
+    ],
+    "files": [
+      {
+        "path": "/etc/hostname",
+        "contents": {
+          "compression": "",
+          "source": "data:,docker-prod"
+        },
+        "mode": 420
+      },
+      {
+        "path": "/etc/NetworkManager/system-connections/ens18.nmconnection",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/1TMwarCMBCF4f28y+0loZaK5ElKF2PmaAPNpCSj0rd3oQjdnvPzTbGoIloqOlOSAG1uJNs3BNiCqjBKaqg3jvhTzvgmNKXt2c+UYUuRkFkfvBKLVLTmgjv7zg1j5zt/cv++pzsbXrwfjp5E23G5fODhB0tqfF0h9A4AAP//iwAGd6oAAAA="
+        },
+        "mode": 384
+      },
+      {
+        "path": "/etc/sudoers.d/docker-prod-passwordless",
+        "contents": {
+          "compression": "",
+          "source": "data:,docker-prod%20ALL%3D(ALL)%20NOPASSWD%3A%20ALL%0A"
+        },
+        "mode": 288
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "contents": "[Unit]\nDescription=Mount Dedicated Storage for Docker Data\nBefore=docker.service podman.service\n\n[Mount]\nWhat=/dev/disk/by-label/Docker\nWhere=/var/lib/docker\nType=xfs\nOptions=defaults,noatime,pquota,nofail\n\n[Install]\nWantedBy=local-fs.target\n",
+        "enabled": true,
+        "name": "var-lib-docker.mount"
+      }
+    ]
+  }
+}

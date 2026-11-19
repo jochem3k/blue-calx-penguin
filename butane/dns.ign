@@ -1,0 +1,67 @@
+{
+  "ignition": {
+    "version": "3.4.0"
+  },
+  "passwd": {
+    "groups": [
+      {
+        "name": "docker"
+      }
+    ],
+    "users": [
+      {
+        "groups": [
+          "wheel",
+          "docker"
+        ],
+        "name": "dns",
+        "sshAuthorizedKeys": [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL+2ziXZaHbOE3RHbvmxpQtqgWaKVKzAW1ay/nQcaUSi jochem@desktop-jochem",
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH9S2P443VA/RLVZojYRGnRD49fV4jyxsbf8rX1I4Qen jochem@thinkpad-jochem",
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICDXG3kPJo+9zVti0TctqjNPrbXLbZrsTMqGYgE21hkL n8n",
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJCLrjQHqsgwHawlZ6o27uvOdOiopO+GB3+EAAaeUx4l conduit"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "directories": [
+      {
+        "group": {
+          "name": "dns"
+        },
+        "path": "/var/opt/docker",
+        "user": {
+          "name": "dns"
+        },
+        "mode": 493
+      }
+    ],
+    "files": [
+      {
+        "path": "/etc/hostname",
+        "contents": {
+          "compression": "",
+          "source": "data:,dns"
+        },
+        "mode": 420
+      },
+      {
+        "path": "/etc/NetworkManager/system-connections/ens18.nmconnection",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/1TMQQrCMBCF4f3cxUpiLRXJSUoXY+dpA82kJKPS27tQhG7f+/mGKatisph1pCgBWl1Ptq0IsBlFYRTVUO484aCc8EtoiOurHSnB5iwhsT55IRYpqNUFd/GN6/rGN/58OvqWHmx487Y7WhKt++X6hbs/LLHybYHQJwAA//9dcMrFqgAAAA=="
+        },
+        "mode": 384
+      },
+      {
+        "path": "/etc/sudoers.d/dns-passwordless",
+        "contents": {
+          "compression": "",
+          "source": "data:,dns%20ALL%3D(ALL)%20NOPASSWD%3A%20ALL%0A"
+        },
+        "mode": 288
+      }
+    ]
+  }
+}
