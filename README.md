@@ -8,6 +8,7 @@ Not a template or a general-purpose image; built for my hardware.
 |---|---|---|
 | blue-calx-penguin-desktop | Desktop (Nvidia, open kernel module) | silverblue-main + akmods-nvidia-open |
 | blue-calx-penguin-thinkpad | ThinkPad (Maxwell GPU, nouveau driver) | silverblue-main |
+| blue-calx-penguin-server | Proxmox based VM servers | ucore:stable |
 
 ## Install
 `sudo bootc switch ghcr.io/jochem3k/blue-calx-penguin-<machine>:latest`
