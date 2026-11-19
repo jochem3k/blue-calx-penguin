@@ -9,11 +9,6 @@ set -ouex pipefail
 ## the /var linkage on the deployed system.
 rm -f /opt && mkdir -p /opt
 
-### Stamp image metadata for unprivileged consumers (fastfetch)
-mkdir -p /usr/share/calx
-date -u +'%Y-%m-%dT%H:%M:%SZ' > /usr/share/calx/build-timestamp
-# server:
-echo "blue-calx-penguin-server" > /usr/share/calx/image-name
 
 ### Install packages (shared across all machines)
 
@@ -30,7 +25,6 @@ btop \
 cifs-utils \
 gh \
 git-credential-libsecret \
-htop \
 intel-gpu-tools \
 iperf3 \
 lazydocker \
