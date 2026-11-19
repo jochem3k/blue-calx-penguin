@@ -37,7 +37,6 @@ lazydocker \
 fresh \
 netbird-client \
 rsync \
-ublue-os-just \
 uupd
 
 # Remove repositories
@@ -54,7 +53,7 @@ rm -rf /var/cache/dnf5 /var/cache/libdnf5
 ### Copy the SERVER system_files into the image
 ### (mounted at /ctx/common/ by the machine's Containerfile)
 
-cp -avf "/ctx/server/system_files"/. /
+cp -avf "/ctx/system_files"/. /
 
 #### Enable SystemD unit files
 

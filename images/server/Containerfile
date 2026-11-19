@@ -3,8 +3,8 @@ ARG FEDORA_VERSION=stable
 
 # Allow build scripts to be referenced without being copied into the final image
 FROM scratch AS ctx
-COPY images/common/build_files /server/build_files
-COPY images/common/system_files /server/system_files
+COPY images/server/build_files /server/build_files
+COPY images/server/system_files /server/system_files
 
 # Base Image
 FROM ghcr.io/ublue-os/ucore:${FEDORA_VERSION}
