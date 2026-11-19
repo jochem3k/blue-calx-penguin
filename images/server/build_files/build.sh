@@ -29,6 +29,7 @@ iperf3 \
 lazydocker \
 fresh \
 netbird-client \
+nfs-utils \
 rsync \
 uupd
 
