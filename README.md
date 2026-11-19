@@ -23,7 +23,7 @@ Host your Ignition file locally on port 8080 (run from the directory containing 
 `python3 -m http.server 8080`
 
 Install bare-metal CoreOS with your Ignition config
-`sudo coreos-installer install /dev/sda --insecure-ignition --ignition-url [http://192.168.2.193:8080/](http://192.168.2.193:8080/)<IGNITION_FILE>.ign`
+`sudo coreos-installer install /dev/sda --insecure-ignition --ignition-url http://192.168.2.193:8080/](http://192.168.2.193:8080/)<IGNITION_FILE>.ign`
 
 Switch directly to your custom server image
 `sudo bootc switch ghcr.io/jochem3k/blue-calx-penguin-server:latest`
@@ -35,7 +35,8 @@ Reboot to apply the new image
 images/common/    shared across all machines
 images/gnome/     GNOME desktop layer
 images/<machine>/ per-machine packages, files, kargs
-images/server/    atomic server
+images/server/    atomic server image
+butane/           butane and ignition files for the servers
 
 ## Verification
 Images are signed with cosign; see cosign.pub.

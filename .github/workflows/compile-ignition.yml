@@ -23,6 +23,7 @@ jobs:
 
       - name: compile-ignition
         run: |
+          set -euo pipefail
           echo "Dynamically locating Butane files in subdirectories..."
 
           # Recursively find all .bu files anywhere in the repository
