@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        machine: [desktop, thinkpad]
+        machine: [desktop, thinkpad, server]
 
     # Job-level so `matrix.machine` is in scope — without the machine suffix,
     # parallel matrix jobs would cancel each other out
