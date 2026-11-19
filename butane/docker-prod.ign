@@ -67,9 +67,14 @@
   "systemd": {
     "units": [
       {
-        "contents": "[Unit]\nDescription=Mount Dedicated Storage for Docker Data\nBefore=docker.service podman.service\n\n[Mount]\nWhat=/dev/disk/by-label/Docker\nWhere=/var/lib/docker\nType=xfs\nOptions=defaults,noatime,pquota,nofail\n\n[Install]\nWantedBy=local-fs.target\n",
+        "contents": "[Unit]\nDescription=Mount Dedicated Storage for Docker Data\nBefore=docker.service podman.service containerd.service\n\n[Mount]\nWhat=/dev/disk/by-label/Docker\nWhere=/var/lib/docker\nType=xfs\nOptions=defaults,noatime,pquota\n\n[Install]\nWantedBy=local-fs.target\n",
         "enabled": true,
         "name": "var-lib-docker.mount"
+      },
+      {
+        "contents": "[Unit]\nDescription=Mount Dedicated Storage for Containerd Data\nBefore=docker.service podman.service containerd.service\n\n[Mount]\nWhat=/dev/disk/by-label/Containerd\nWhere=/var/lib/containerd\nType=xfs\nOptions=defaults,noatime,pquota\n\n[Install]\nWantedBy=local-fs.target\n",
+        "enabled": true,
+        "name": "var-lib-containerd.mount"
       }
     ]
   }
