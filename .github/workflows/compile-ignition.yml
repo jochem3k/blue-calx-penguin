@@ -7,7 +7,7 @@ on:
     branches:
       - main
     paths:
-      - "butane/**.bu"
+      - "butane/**/*.bu"
   workflow_dispatch: {}
 
 jobs:
@@ -40,8 +40,12 @@ jobs:
 
           echo "All subdirectory compilations completed successfully."
 
-      - name: commit-ignition
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Commit Ignition files
+        uses: planetscale/ghcommit-action@v0.2.22
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           commit_message: "chore: automated butane to ignition translation [skip ci]"
-          file_pattern: "**.ign"
+          repo: ${{ github.repository }}
+          branch: ${{ github.head_ref || github.ref_name }}
+          file_pattern: "*.ign"
