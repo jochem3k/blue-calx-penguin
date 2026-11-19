@@ -58,7 +58,6 @@ cp -avf "/ctx/system_files"/. /
 #### Enable SystemD unit files
 
 systemctl enable netbird.service
-systemctl enable cups.service
 systemctl enable uupd.timer
 systemctl enable docker.service
 systemctl enable docker-prune.timer
