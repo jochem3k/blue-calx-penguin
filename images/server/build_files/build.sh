@@ -53,6 +53,7 @@ cp -avf "/ctx/system_files"/. /
 systemctl enable netbird.service
 systemctl enable uupd.timer
 systemctl enable docker.service
+systemctl enable docker.socket
 systemctl enable docker-prune.timer
 systemctl enable fix-qemuga-selinux.service
 systemctl disable fwupd-refresh.timer
