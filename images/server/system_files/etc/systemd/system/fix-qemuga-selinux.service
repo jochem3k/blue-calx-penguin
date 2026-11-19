@@ -1,0 +1,14 @@
+[Unit]
+Description=Allow qemu-ga to read non-security files for Proxmox backups
+# Only run this on the very first provision to save boot time later
+ConditionFirstBoot=yes
+After=network.target
+
+[Service]
+Type=oneshot
+# The -P flag ensures it persists in the SELinux policy DB
+ExecStart=/usr/sbin/setsebool -P virt_qemu_ga_read_nonsecurity_files 1
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

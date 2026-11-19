@@ -1,0 +1,68 @@
+#!/bin/bash
+
+set -ouex pipefail
+
+### Fix /opt symlink for build-time RPM installs
+## Fedora bootc symlinks /opt -> /var/opt, which is dangling in the build
+## container and breaks RPMs that install into /opt (e.g. helium-bin).
+## Replace it with a real directory for the build; bootc re-establishes
+## the /var linkage on the deployed system.
+rm -f /opt && mkdir -p /opt
+
+### Stamp image metadata for unprivileged consumers (fastfetch)
+mkdir -p /usr/share/calx
+date -u +'%Y-%m-%dT%H:%M:%SZ' > /usr/share/calx/build-timestamp
+# server:
+echo "blue-calx-penguin-server" > /usr/share/calx/image-name
+
+### Install packages (shared across all machines)
+
+# Add repositories
+dnf5 -y copr enable jsbillings/netbird
+dnf5 -y copr enable ublue-os/packages
+dnf5 -y copr enable atim/lazydocker
+dnf5 install -y --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release terra-gpg-keys
+
+# Install DNF packages
+dnf5 install -y \
+bind-utils \
+btop \
+cifs-utils \
+gh \
+git-credential-libsecret \
+htop \
+intel-gpu-tools \
+iperf3 \
+lazydocker \
+fresh \
+netbird-client \
+rsync \
+ublue-os-just \
+uupd
+
+# Remove repositories
+dnf5 -y copr disable jsbillings/netbird
+dnf5 -y copr disable ublue-os/packages
+dnf5 -y copr disable atim/lazydocker
+dnf5 config-manager setopt 'terra*.enabled=0'
+
+# Cleanup DNF metadata
+dnf5 clean all
+rm -rf /var/cache/dnf5 /var/cache/libdnf5
+
+
+### Copy the SERVER system_files into the image
+### (mounted at /ctx/common/ by the machine's Containerfile)
+
+cp -avf "/ctx/server/system_files"/. /
+
+#### Enable SystemD unit files
+
+systemctl enable netbird.service
+systemctl enable cups.service
+systemctl enable uupd.timer
+systemctl enable docker.service
+systemctl enable docker-prune.timer
+systemctl enable fix-qemuga-selinux.service
+systemctl disable fwupd-refresh.timer
+systemctl mask fwupd-refresh.service

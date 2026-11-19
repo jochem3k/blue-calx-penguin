@@ -1,0 +1,11 @@
+[Unit]
+Description=Automated Docker System Prune
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/docker system prune --all --force
+
+[Install]
+WantedBy=multi-user.target
