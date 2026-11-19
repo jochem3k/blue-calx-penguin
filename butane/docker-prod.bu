@@ -60,11 +60,27 @@ systemd:
       contents: |
         [Unit]
         Description=Mount Dedicated Storage for Docker Data
-        Before=docker.service podman.service
+        Before=docker.service podman.service containerd.service
 
         [Mount]
         What=/dev/disk/by-label/Docker
         Where=/var/lib/docker
+        Type=xfs
+        Options=defaults,noatime,pquota
+
+        [Install]
+        WantedBy=local-fs.target
+
+    - name: var-lib-containerd.mount
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Mount Dedicated Storage for Containerd Data
+        Before=docker.service podman.service containerd.service
+
+        [Mount]
+        What=/dev/disk/by-label/Containerd
+        Where=/var/lib/containerd
         Type=xfs
         Options=defaults,noatime,pquota
 
