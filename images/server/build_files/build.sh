@@ -24,7 +24,6 @@ bind-utils \
 btop \
 cifs-utils \
 gh \
-git-credential-libsecret \
 intel-gpu-tools \
 iperf3 \
 lazydocker \
