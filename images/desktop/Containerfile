@@ -9,6 +9,7 @@ COPY images/desktop/build_files /build_files
 COPY images/desktop/system_files /system_files
 COPY images/gnome/build_files /gnome/build_files
 COPY images/gnome/system_files /gnome/system_files
+COPY --chmod=0644 images/desktop/system_files/etc/hostname /etc/hostname
 
 
 # Base Image
