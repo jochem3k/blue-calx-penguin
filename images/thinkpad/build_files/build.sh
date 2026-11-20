@@ -29,7 +29,7 @@ dnf5 -y copr enable bieszczaders/kernel-cachyos
 dnf5 remove -y kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra
 
 # Install CachyOS kernel
-dnf5 install -y kernel-cachyos
+dnf5 install -y --setopt=tsflags=noscripts kernel-cachyos
 
 # Remove repositories
 dnf5 -y copr disable bieszczaders/kernel-cachyos
@@ -42,8 +42,8 @@ rm -rf /var/cache/dnf5 /var/cache/libdnf5
 
 
 #### Rebuild initramfs because of cachyos kernel
-#
-KERNEL_VERSION="$(rpm -q --queryformat='%{VERSION}-%{RELEASE}.%{ARCH}' kernel-cachyos)"
+KERNEL_VERSION="$(rpm -q --queryformat='%{VERSION}-%{RELEASE}.%{ARCH}' kernel-cachyos-core)"
+depmod -a "$KERNEL_VERSION"
 export DRACUT_NO_XATTR=1
 dracut --no-hostonly --kver "$KERNEL_VERSION" --reproducible --add ostree \
     -f "/usr/lib/modules/$KERNEL_VERSION/initramfs.img"
