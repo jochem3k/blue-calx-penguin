@@ -99,6 +99,7 @@ rm -rf /var/cache/dnf5 /var/cache/libdnf5
         "com.bitwarden.desktop",
         "com.rafaelmardojai.Blanket",
         "hu.irl.cameractrls",
+        "org.cockpit_project.CockpitClient",
         "com.github.finefindus.eyedropper",
         "org.filezillaproject.Filezilla",
         "com.github.tchx84.Flatseal",
