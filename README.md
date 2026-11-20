@@ -7,7 +7,7 @@ Not a template or a general-purpose image; built for my hardware.
 | Image | Machine | Base |
 |---|---|---|
 | blue-calx-penguin-desktop | Desktop (Nvidia, open kernel module) | silverblue-main + akmods-nvidia-open |
-| blue-calx-penguin-thinkpad | ThinkPad (Maxwell GPU, nouveau driver) | silverblue-main |
+| blue-calx-penguin-thinkpad | ThinkPad (Maxwell GPU, nouveau driver) | silverblue-main + CachyOS kernel |
 | blue-calx-penguin-server | Proxmox based VM servers | ucore-minimal |
 
 ## Install
