@@ -87,7 +87,7 @@ rm -rf /var/cache/dnf5 /var/cache/libdnf5
   "type": "default-flatpaks",
   "configurations": [
     {
-      "notify": true,
+      "notify": false,
       "scope": "system",
       "repo": {
         "url": "https://dl.flathub.org/repo/flathub.flatpakrepo",
