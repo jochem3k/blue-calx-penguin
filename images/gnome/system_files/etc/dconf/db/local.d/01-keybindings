@@ -1,33 +1,37 @@
+[org/gnome/desktop/wm/keybindings]
 close=['<Super>q']
 maximize=@as []
 unmaximize=@as []
 
-[custom-keybindings/custom0]
+[org/gnome/settings-daemon/plugins/media-keys]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/']
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
 binding='<Super>Return'
 command='ghostty'
 name='Ghostty'
 
-[custom-keybindings/custom1]
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
 binding='<Ctrl>Escape'
 command='flatpak run net.nokyan.Resources'
 name='Resources'
 
-[custom-keybindings/custom2]
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2]
 binding='<Super>comma'
 command='flatpak run org.gnome.Characters'
 name='Characters'
 
-[custom-keybindings/custom3]
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3]
 binding='<Super>b'
 command='flatpak run app.zen_browser.zen'
 name='Zen'
 
-[custom-keybindings/custom4]
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4]
 binding='<Super>z'
 command='flatpak run dev.zed.Zed'
 name='Zed'
 
-[custom-keybindings/custom5]
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5]
 binding='<Super>e'
 command='nautilus'
 name='Nautilus'
