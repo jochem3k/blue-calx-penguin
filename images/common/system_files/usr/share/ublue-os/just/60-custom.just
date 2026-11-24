@@ -22,3 +22,21 @@ push msg="update dotfiles":
     @chezmoi git -- commit -m "{{ msg }}"
     @echo "📤 Pushing to remote..."
     @chezmoi git push
+
+# Suspend the system
+[group('System')]
+sleep:
+    @echo "💤 Suspending..."
+    systemctl suspend
+
+# Reboot the system
+[group('System')]
+reboot:
+    @echo "🔄 Rebooting..."
+    systemctl reboot
+
+# Shut down the system
+[group('System')]
+shutdown:
+    @echo "⏻ Shutting down..."
+    systemctl poweroff
