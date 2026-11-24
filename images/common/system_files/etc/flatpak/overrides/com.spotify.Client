@@ -1,5 +1,2 @@
 [Context]
-sockets=!wayland;x11;
-
-[Environment]
-WAYLAND_DISPLAY=
+sockets=x11
