@@ -10,7 +10,7 @@ set -ouex pipefail
 rm -f /opt && mkdir -p /opt
 
 
-### Install packages (shared across all machines)
+### Install packages (shared across all servers)
 
 # Add repositories
 dnf5 -y copr enable jsbillings/netbird
@@ -45,7 +45,7 @@ rm -rf /var/cache/dnf5 /var/cache/libdnf5
 
 
 ### Copy the SERVER system_files into the image
-### (mounted at /ctx/common/ by the machine's Containerfile)
+### (mounted at /ctx/common/ by the servers's Containerfile)
 
 cp -avf "/ctx/system_files"/. /
 

@@ -19,8 +19,8 @@
             "disable": false
         },
         "fwupd": {
-          "disable": false,
-            "binary-path": "/usr/bin/fwupdmgr"
+            "disable":false,
+             "binary-path": "/usr/bin/fwupdmgr"
         },
         "system": {
             "disable": false
