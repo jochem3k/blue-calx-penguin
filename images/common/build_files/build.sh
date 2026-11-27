@@ -121,6 +121,18 @@ rm -rf /var/cache/dnf5 /var/cache/libdnf5
         "com.usebottles.bottles",
         "com.discordapp.Discord"
       ]
+    },
+    {
+      "notify": false,
+      "scope": "system",
+      "repo": {
+        "url": "https://flatpak.ladybird.org/ladybird.flatpakrepo",
+        "name": "ladybird",
+        "title": "Ladybird (system)"
+      },
+      "install": [
+        "org.ladybird.Ladybird"
+      ]
     }
   ]
 }'
